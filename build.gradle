@@ -9,6 +9,11 @@ repositories {
     mavenCentral()
 }
 
+dependencies {
+    // https://mvnrepository.com/artifact/com.googlecode.soundlibs/mp3spi
+    compile group: 'com.googlecode.soundlibs', name: 'mp3spi', version: '1.9.5.4'
+}
+
 task sourcesJar(type: Jar, dependsOn: classes) {
     classifier = 'sources'
     from sourceSets.main.allSource
@@ -24,4 +29,5 @@ jar {
                 'Main-Class': 'com.github.wkruk0.musicwriter.Main'
         )
     }
+    from configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
 }
